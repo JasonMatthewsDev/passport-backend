@@ -1,0 +1,22 @@
+{
+  "name": "passport-coding-challenge",
+  "version": "0.0.1",
+  "description": "Small express server to support the front end for the passport coding challenge.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node -r esm src/index.js",
+    "start:dev": "nodemon -r esm src/index.js"
+  },
+  "author": "Jason Matthews - jason.matthews.dev@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv-safe": "^6.1.0",
+    "esm": "^3.2.22",
+    "express": "^4.16.4",
+    "mongoose": "^5.5.4",
+    "nodemon": "^1.18.11",
+    "ws": "^6.2.1"
+  }
+}
