@@ -9,6 +9,9 @@
   },
   "author": "Jason Matthews - jason.matthews.dev@gmail.com",
   "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.18.11"
+  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -16,7 +19,6 @@
     "esm": "^3.2.22",
     "express": "^4.16.4",
     "mongoose": "^5.5.4",
-    "nodemon": "^1.18.11",
     "ws": "^6.2.1"
   }
 }

@@ -35,14 +35,17 @@ const factorySchema = mongoose.Schema({
     createdAt: 'created_at'
   }
 });
-
-const Factory = new mongoose.model('Fatory', factorySchema);
+const Factory = new mongoose.model('Factory', factorySchema);
 
 const getAllFactories = async () => await Factory.find({});
 
+//Check for a valid number
 const isInteger = num => !isNaN(parseInt(num)) && isFinite(num);
+
+//Generate a random integer from min - max
 const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
+//Creates a new factory document in the database
 const createFactory = ({ name, lowerBound, upperBound, itemCount }) => {
   //These checks are probably extra defensive since it's protected at the schema level
   if (!/^[a-zA-Z0-9 -]+$/.test(name)) {
@@ -69,12 +72,14 @@ const createFactory = ({ name, lowerBound, upperBound, itemCount }) => {
     throw new Error('upperBound must be greater than lower bound');
   }
 
+  //Generate an array of random integers
   const nodes = new Array(itemCount).fill(null).map(() => randomInt(lowerBound, upperBound));
 
   return Factory.create({ name, lowerBound, upperBound, itemCount, nodes });
 };
 
-const updateFactory = async ({ _id, change }) => {
+//Updates an existing factory document in the database
+const updateFactory = async (_id, { change }) => {
   const { name, lowerBound, upperBound } = change;
 
   //These checks are probably extra defensive since it's protected at the schema level
@@ -106,7 +111,8 @@ const updateFactory = async ({ _id, change }) => {
   return Factory.updateOne({ _id }, { $set: { ...change, nodes } });
 };
 
-const deleteFactory = ({ _id }) => {
+//deletes a factory document from the database
+const deleteFactory = _id => {
   if (!mongoose.Types.ObjectId.isValid(_id)) {
     throw new Error('Invalid object id');
   }
